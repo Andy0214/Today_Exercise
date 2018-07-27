@@ -68,8 +68,11 @@ for i in range(len(message)):
 
 print('-----------------------')
 '''
-利用括号分组
-用管道匹配多个分
+利用括号分组  
+正则表达式字符串中的第一对括号是第1组。第二对括号是第2组。向 group()匹配对象方法传入整数1或2，就可以取得匹配文本的不同部分。
+向group()方法传入0或不传入参数，将返回整个匹配的文本
+
+用管道匹配多个分   |
 如果 Batman 和 Tina Fey 都出现在被查找的字符串中，第一次出现的匹配文本，将作为 Match 对象返回
 '''
 heroRegex = re.compile (r'Batman|Tina Fey')
@@ -191,3 +194,18 @@ robocop.search('RoboCop is part man, part machine, all cop.').group()
 robocop.search('ROBOCOP protects the innocent.').group()
 
 robocop.search('Al, why does your programming book talk about robocop so much?').group()
+
+
+print('----------------sub---------------')
+'''
+用 sub()方法替换字符串
+Regex对象的 sub()方法需要传入两个参数。第一个参数是一个字符串，用于取代发现的匹配。第二个参数是一个字符串，即正则表达式
+'''
+namesRegex = re.compile(r'Agent \w+')
+ns = namesRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')
+print(ns)
+
+
+agentNamesRegex = re.compile(r'Agent (\w)(\w)\w*')
+anrs = agentNamesRegex.sub(r'\2****', 'Agent Alice told Agent Carol that Agent Eve knew Agent Bob was a double agent.')
+print(anrs)                                 #A**** told       C**** that       E**** knew     B**** was a double agent.
