@@ -6,6 +6,7 @@
 
 
 import os
+import shelve
 
 
 '''
@@ -99,3 +100,56 @@ print('--------------------rw--------------------')
 # hellolines = helloFile.readlines()
 # print(helloContent)
 # print(hellolines)
+
+'''
+写入文件
+将'w'作为第二个参数传递给 open()，以写模式打开该文件
+将'a'作为第二个参数传递给 open()，以添加模式打开该文件
+'''
+
+# file = open('WiFi_Log.txt', 'w')
+file = open('WiFi_Log.txt', 'a')
+file.write("\n你好，你是谁啊")
+file.close()
+
+file = open('WiFi_Log.txt')
+content = file.read()
+file.close()
+print(content)
+
+
+'''
+用 shelve 模块保存变量
+'''
+shelfFile = shelve.open('mydata')
+cats = ['Zophie', 'Pooka', 'Simon']
+shelfFile['cats'] = cats
+shelfFile.close()
+
+shelfFile = shelve.open('mydata')
+type(shelfFile)
+print(shelfFile['cats'])#['Zophie', 'Pooka', 'Simon']
+print(shelfFile['cats'][0])#Zophie
+
+print(list(shelfFile.keys()))#['cats']
+print(list(shelfFile.values()))#[['Zophie', 'Pooka', 'Simon']]
+shelfFile.close()
+
+
+'''
+用 pprint.pformat()函数保存变量
+'''
+import pprint
+
+cats = [{'name': 'Zophie', 'desc': 'chubby'}, {'name': 'Pooka', 'desc': 'fluffy'}]
+pprint.pformat(cats)
+fileObj = open('myCats.py', 'w')
+fileObj.write('cats = ' + pprint.pformat(cats) + '\n')
+fileObj.close()
+
+
+import myCats
+
+print(myCats.cats)#[{'desc': 'chubby', 'name': 'Zophie'}, {'desc': 'fluffy', 'name': 'Pooka'}]
+print(myCats.cats[0])#{'desc': 'chubby', 'name': 'Zophie'}
+print(myCats.cats[0]['name'])#Zophie
