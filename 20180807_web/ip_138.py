@@ -12,7 +12,7 @@ import urllib
 
 
 def Get_Excel_data():
-    file = './ipsearch.xlsx'
+    file = './ip.xlsx'
     inwb = load_workbook(file)  # 读文件
     sheetnames = inwb.get_sheet_names()  # 获取文件中的所有的sheet表，通过名字的方式
     print(sheetnames)

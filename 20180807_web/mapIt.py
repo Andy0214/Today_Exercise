@@ -5,6 +5,8 @@
 
 import webbrowser, sys, logging, pyperclip, requests
 
+import urllib.request
+
 logging.disable(logging.CRITICAL)
 logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s -%(levelname)s - %(message)s')
 
